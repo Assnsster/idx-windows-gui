@@ -65,7 +65,14 @@
      fi
 
       mkdir -p "$VM_DIR"
-      wget -P $VM_DIR -O $VM_DIR/windows.qcow2 https://bit.ly/45hceMn
+
+      if [ ! -f "$RAW_DISK" ]; then
+        echo "Downloading QCOW2 disk..."
+        wget -P $VM_DIR -O $VM_DIR/windows.qcow2 https://bit.ly/45hceMn
+      else
+        echo "QCOW2 disk already exists, skipping download."
+      fi
+      
 
       # =========================
       # Download Windows ISO if missing
